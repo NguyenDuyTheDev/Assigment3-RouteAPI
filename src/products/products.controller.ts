@@ -17,6 +17,18 @@ export class ProductsController {
   // GET /products
   @Get()
   getAllProducts() {
+    const DATA = ROUTELIST.sort((a, b) => {
+      const RouteNoA = a.RouteNo.toUpperCase();
+      const RouteNoB = b.RouteNo.toUpperCase();
+
+      if (RouteNoA < RouteNoB) {
+        return -1;
+      }
+      if (RouteNoA > RouteNoB) {
+        return 1;
+      }
+      return 0;
+    });
     return ROUTELIST;
   }
 
@@ -30,4 +42,16 @@ export class ProductsController {
     }
     return NOTFOUND;
   }
+
+  @Get(':id/route')
+  getRoute(@Param('id') prodId: string) {
+    for (let index = 0; index < ROUTEDETAIL.length; ++index) {
+      if (ROUTEDETAIL[index]["RouteNo"] == prodId) {
+        return ROUTEDETAIL[index]['InBoundDescription'];
+      } 
+    }
+    return NOTFOUND;
+  }
 }
+
+
