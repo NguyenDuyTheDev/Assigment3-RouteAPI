@@ -24,9 +24,9 @@ export class ProductsController {
 
   // GET /routes/:id
   @Get(':id')
-  getProduct(@Param('id') prodId: string) {
+  getProduct(@Param('id') prodId: number) {
     for (let index = 0; index < ROUTEDETAIL.length; ++index) {
-      if (ROUTEDETAIL[index]["RouteNo"] == prodId) {
+      if (ROUTEDETAIL[index]["RouteId"] == prodId) {
         return ROUTEDETAIL[index];
       } 
     }
