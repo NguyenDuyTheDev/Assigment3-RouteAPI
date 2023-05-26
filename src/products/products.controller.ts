@@ -47,7 +47,11 @@ export class ProductsController {
   getRouteEndStops(@Param('id') prodId: number) {
     for (let index = 0; index < ROUTESTOPS.length; ++index) {
       if (ROUTESTOPS[index]["RouteId"] == prodId) {
-        return ROUTESTOPS[index + 1]['RouteDetail'];
+        for (let subindex = index + 1; subindex < ROUTESTOPS.length; ++subindex) {
+          if (ROUTESTOPS[subindex]["RouteId"] == prodId) {
+            return ROUTESTOPS[subindex]["RouteDetail"];
+          }
+        }
       } 
     }
     return NOTFOUND;
