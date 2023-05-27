@@ -7,10 +7,12 @@ import { AppService } from './app.service';
 import { UserModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb+srv://bussmart:abcdefhg1234@cluster-bus-smart.fphuddj.mongodb.net/?retryWrites=true&w=majority'),
+    MongooseModule.forRoot(process.env.MONGODB_URI),
     ProductsModule,
     StopssModule,
     UserModule,
