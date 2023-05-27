@@ -1,4 +1,4 @@
-import { Body, Controller, Post, UseGuards, Get } from '@nestjs/common';
+import { Body, Controller, Post, UseGuards, Get, Param } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { UsersService } from './users.service';
 
@@ -8,8 +8,8 @@ export class UsersController {
     constructor(private readonly usersService: UsersService) { }
 
     @UseGuards(AuthGuard('jwt'))
-    @Get()
-    getUserByUsername(@Body('username') username: string) {
+    @Get(':username')
+    getUserByUsername(@Param('username') username: string) {
         return this.usersService.getUserByUsername(username);
     }
 
