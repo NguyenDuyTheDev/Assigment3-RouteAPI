@@ -1,4 +1,4 @@
-import { Body, Controller, Post, UseGuards, Get, Param } from '@nestjs/common';
+import { Body, Controller, Post, UseGuards, Get, Param, Put } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { UsersService } from './users.service';
 
@@ -32,4 +32,11 @@ export class UsersController {
             user: result
         }
     }
+
+    @UseGuards(AuthGuard('jwt'))
+    @Put('/:id')
+    updateUser(@Param('id') id: number, @Body() userDto: any) {
+        return this.usersService.editUser(id, userDto);
+    }
+
 }

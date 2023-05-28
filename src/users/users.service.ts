@@ -11,8 +11,20 @@ export class UsersService {
     return this.userModel.findOne({ username }).exec();
   }
 
-  async editUser() {
+  async editUser(id: number, info: Object) {
+    try {
+      await this.userModel.updateOne({id}, { $set: info })
 
+      return {
+        message: "update successfully!",
+        data: {
+          ...info
+        }
+      }
+      
+    } catch (error) {
+      return error
+    }
   }
 
   async registerUser(userInfo: any) {
